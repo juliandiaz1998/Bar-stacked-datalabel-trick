@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<!-- saved from url=(0066)http://www.chartjs.org/samples/latest/advanced/data-labelling.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Labelling Data Points</title>
+	<script async="" src="./Labelling Data Points_files/analytics.js.descarga"></script><script src="./Labelling Data Points_files/Chart.bundle.js.descarga"></script><style type="text/css">/* Chart.js */
+@-webkit-keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}@keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}.chartjs-render-monitor{-webkit-animation:chartjs-render-animation 0.001s;animation:chartjs-render-animation 0.001s;}</style>
+	<script src="./Labelling Data Points_files/utils.js.descarga"></script>
+	<style>
+		canvas {
+			-moz-user-select: none;
+			-webkit-user-select: none;
+			-ms-user-select: none;
+		}
+	</style>
+<link id="avast_os_ext_custom_font" href="./Labelling Data Points_files/css" rel="stylesheet" type="text/css"><link href="./Labelling Data Points_files/css(1)" rel="stylesheet" type="text/css"><link href="./Labelling Data Points_files/css(2)" rel="stylesheet" type="text/css"><link href="./Labelling Data Points_files/css(3)" rel="stylesheet" type="text/css"><link href="./Labelling Data Points_files/css(4)" rel="stylesheet" type="text/css"><style id="wrc-css" type="text/css">.wrcx {display:none} .r .wrcx,  .fc .wrcx, #rhsline ol .wrcx {display:inline-block !important; position:relative !important; background: url("chrome-extension://gomekmidlodglbbmalcneegieacbdmki/common/ui/icons/serp-none.png") right no-repeat},.wrcx {display:none} .osl .wrcx, .vresult .r, .tl .r .wrcx{ display: none;}
+.wrc0 {display:none} .r .wrc0,  .fc .wrc0, #rhsline ol .wrc0 {display:inline-block !important; position:relative !important; background: url("chrome-extension://gomekmidlodglbbmalcneegieacbdmki/common/ui/icons/serp-none.png") right no-repeat},.wrc0 {display:none} .osl .wrc0, .vresult .r, .tl .r .wrc0{ display: none;}
+.wrc1 {display:none} .r .wrc1,  .fc .wrc1, #rhsline ol .wrc1 {display:inline-block !important; position:relative !important; background: url("chrome-extension://gomekmidlodglbbmalcneegieacbdmki/common/ui/icons/serp-ok.png") right no-repeat},.wrc1 {display:none} .osl .wrc1, .vresult .r, .tl .r .wrc1{ display: none;}
+.wrc2 {display:none} .r .wrc2,  .fc .wrc2, #rhsline ol .wrc2 {display:inline-block !important; position:relative !important; background: url("chrome-extension://gomekmidlodglbbmalcneegieacbdmki/common/ui/icons/serp-attention.png") right no-repeat},.wrc2 {display:none} .osl .wrc2, .vresult .r, .tl .r .wrc2{ display: none;}
+.wrc3 {display:none} .r .wrc3,  .fc .wrc3, #rhsline ol .wrc3 {display:inline-block !important; position:relative !important; background: url("chrome-extension://gomekmidlodglbbmalcneegieacbdmki/common/ui/icons/serp-error.png") right no-repeat},.wrc3 {display:none} .osl .wrc3, .vresult .r, .tl .r .wrc3{ display: none;}
+#wrcHoverDiv .aos-tooltip-logo-img { background-image: url(chrome-extension://gomekmidlodglbbmalcneegieacbdmki/common/ui/icons/logo-white.png); }
+#wrcHoverDiv .aos-tooltip-attention .aos-tooltip-logo-img { background-image: url(chrome-extension://gomekmidlodglbbmalcneegieacbdmki/common/ui/icons/logo-dark.png); }</style></head>
+
+<body>
+	<div style="width: 75%"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+		<canvas id="canvas" width="596" height="298" class="chartjs-render-monitor" style="display: block; width: 596px; height: 298px;"></canvas>
+	</div>
+	<button id="randomizeData">Randomize Data</button>
+	<script>
+		var color = Chart.helpers.color;
+		var barChartData = {
+			labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+			datasets: [{
+				type: 'bar',
+				label: 'Dataset 1',
+				backgroundColor: color(window.chartColors.red).alpha(0.2).rgbString(),
+				borderColor: window.chartColors.red,
+				data: [
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor()
+				]
+			}, {
+				type: 'line',
+				label: 'Dataset 2',
+				backgroundColor: color(window.chartColors.blue).alpha(0.2).rgbString(),
+				borderColor: window.chartColors.blue,
+				data: [
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor()
+				]
+			}, {
+				type: 'bar',
+				label: 'Dataset 3',
+				backgroundColor: color(window.chartColors.green).alpha(0.2).rgbString(),
+				borderColor: window.chartColors.green,
+				data: [
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor()
+				]
+			}]
+		};
+
+		// Define a plugin to provide data labels
+		Chart.plugins.register({
+			afterDatasetsDraw: function(chart) {
+				var ctx = chart.ctx;
+
+				chart.data.datasets.forEach(function(dataset, i) {
+					var meta = chart.getDatasetMeta(i);
+					if (!meta.hidden) {
+						meta.data.forEach(function(element, index) {
+							// Draw the text in black, with the specified font
+							ctx.fillStyle = 'rgb(0, 0, 0)';
+
+							var fontSize = 16;
+							var fontStyle = 'normal';
+							var fontFamily = 'Helvetica Neue';
+							ctx.font = Chart.helpers.fontString(fontSize, fontStyle, fontFamily);
+
+							// Just naively convert to string for now
+							var dataString = dataset.data[index].toString();
+
+							// Make sure alignment settings are correct
+							ctx.textAlign = 'center';
+							ctx.textBaseline = 'middle';
+
+							var padding = 5;
+							var position = element.tooltipPosition();
+							ctx.fillText(dataString, position.x, position.y - (fontSize / 2) - padding);
+						});
+					}
+				});
+			}
+		});
+
+		window.onload = function() {
+			var ctx = document.getElementById('canvas').getContext('2d');
+			window.myBar = new Chart(ctx, {
+				type: 'bar',
+				data: barChartData,
+				options: {
+					responsive: true,
+					title: {
+						display: true,
+						text: 'Chart.js Combo Bar Line Chart'
+					},
+				}
+			});
+		};
+
+		document.getElementById('randomizeData').addEventListener('click', function() {
+			barChartData.datasets.forEach(function(dataset) {
+				dataset.data = dataset.data.map(function() {
+					return randomScalingFactor();
+				});
+			});
+			window.myBar.update();
+		});
+	</script>
+
+
+
+</body></html>
